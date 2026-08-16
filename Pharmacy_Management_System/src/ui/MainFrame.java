@@ -31,6 +31,7 @@ public class MainFrame extends JFrame {
         JButton btnRestock = new JButton("Restock +");
         JButton btnDelete = new JButton("Delete");
         JButton btnRefresh = new JButton("Refresh");
+        JButton btnPos = new JButton("New Sale (POS)");
 
         // POLYMORPHISM: staff never even SEE add/delete
         if (!user.canDeleteMedicine()) { btnAdd.setVisible(false); btnDelete.setVisible(false); }
@@ -38,9 +39,18 @@ public class MainFrame extends JFrame {
         btnAdd.addActionListener(e -> new AddMedicineFrame(this::loadMedicines).setVisible(true));
         btnRestock.addActionListener(e -> restock());
         btnDelete.addActionListener(e -> deleteMedicine());
+        btnPos.addActionListener(e -> new PosFrame(user).setVisible(true));
         btnRefresh.addActionListener(e -> loadMedicines());
 
         JPanel buttons = new JPanel();
+        buttons.add(btnPos);
+        JButton btnUsers = new JButton("Manage Users");
+        JButton btnReports = new JButton("Sales History");
+        btnUsers.addActionListener(e -> new UsersFrame().setVisible(true));
+        btnReports.addActionListener(e -> new ReportsFrame().setVisible(true));
+        buttons.add(btnReports);
+if (!user.canDeleteMedicine()) btnUsers.setVisible(false);
+buttons.add(btnUsers);
         buttons.add(btnAdd); buttons.add(btnRestock);
         buttons.add(btnDelete); buttons.add(btnRefresh);
 
