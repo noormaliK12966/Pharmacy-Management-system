@@ -24,4 +24,33 @@ public class MedicineDAO {
         } catch (SQLException e) { e.printStackTrace(); }
         return list;
     }
+    public boolean insert(Medicine m) {
+    String sql = "INSERT INTO medicines (name, category, price, stock, min_stock, expiry_date, supplier_id) VALUES (?,?,?,?,?,?,?)";
+    try (Connection con = DBConnection.getConnection();
+         PreparedStatement ps = con.prepareStatement(sql)) {
+        ps.setString(1, m.getName());   ps.setString(2, m.getCategory());
+        ps.setDouble(3, m.getPrice());  ps.setInt(4, m.getStock());
+        ps.setInt(5, m.getMinStock());  ps.setDate(6, Date.valueOf(m.getExpiryDate()));
+        ps.setInt(7, m.getSupplierId());
+        return ps.executeUpdate() > 0;
+    } catch (SQLException e) { e.printStackTrace(); return false; }
+}
+
+public boolean updateStock(int id, int newStock) {
+    String sql = "UPDATE medicines SET stock = ? WHERE id = ?";
+    try (Connection con = DBConnection.getConnection();
+         PreparedStatement ps = con.prepareStatement(sql)) {
+        ps.setInt(1, newStock); ps.setInt(2, id);
+        return ps.executeUpdate() > 0;
+    } catch (SQLException e) { e.printStackTrace(); return false; }
+}
+
+public boolean delete(int id) {
+    String sql = "DELETE FROM medicines WHERE id = ?";
+    try (Connection con = DBConnection.getConnection();
+         PreparedStatement ps = con.prepareStatement(sql)) {
+        ps.setInt(1, id);
+        return ps.executeUpdate() > 0;
+    } catch (SQLException e) { e.printStackTrace(); return false; }
+}
 }

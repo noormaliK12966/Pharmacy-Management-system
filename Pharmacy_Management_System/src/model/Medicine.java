@@ -41,6 +41,7 @@ public class Medicine {
     public String getName() { return name; }
     public void setName(String name) { this.name = name; }
     public void setCategory(String c) { this.category = c; }
+    public String getCategory() { return category; }
     public void setMinStock(int m) { this.minStock = m; }
     public int getMinStock() { return minStock; }
     public LocalDate getExpiryDate() { return expiryDate; }
@@ -51,4 +52,5 @@ public class Medicine {
 
     @Override
     public String toString() { return name + " | Rs." + price + " | stock:" + stock; }
+    
 }
