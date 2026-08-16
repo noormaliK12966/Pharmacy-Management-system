@@ -19,6 +19,14 @@ public class Medicine {
         this.expiryDate = expiryDate; this.supplierId = supplierId;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     // ENCAPSULATION: the outside world can only touch data through these doors
     public void setPrice(double price) {
         if (price <= 0) throw new IllegalArgumentException("Price must be > 0");
